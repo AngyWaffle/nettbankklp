@@ -1,0 +1,6 @@
+@nettbank.Server_HostAddress = http://localhost:5008
+
+GET {{nettbank.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

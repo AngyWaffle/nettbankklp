@@ -1,0 +1,24 @@
+{
+  "Version": 1,
+  "Hash": "2GJ8+a60CSa3Szq0fXHeKy0CoqGRm0vExSCVtD7X3A4=",
+  "Source": "nettbank.Server",
+  "BasePath": "_content/nettbank.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\jacob\\source\\repos\\nettbank\\nettbank.client\\nettbank.client.esproj",
+      "Version": 2,
+      "Source": "nettbank.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
