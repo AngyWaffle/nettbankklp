@@ -25,8 +25,8 @@ namespace nettbank.Server.Migrations
                     b.Property<long>("AccountNumber")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("Balance")
-                        .HasColumnType("INTEGER");
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -41,10 +41,17 @@ namespace nettbank.Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("AccountType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("AccountNumber");
+
+                    b.HasIndex("AccountNumber")
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 
@@ -60,10 +67,17 @@ namespace nettbank.Server.Migrations
                     b.Property<long>("AccountNumber")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("Transaction")
+                    b.Property<long>("AccountNumberReceived")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("TransactionTime")
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

@@ -36,6 +36,23 @@ public class UserController : ControllerBase
             //Saves the user to the db
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
+            
+            var Sparekonto = new AccountDto
+            {
+                AccountNumber = 0,
+                UserId = user.UserId,
+                AccountType = "Sparekonto"
+            };
+            var Brukskonto = new AccountDto
+            {
+                AccountNumber = 0,
+                UserId = user.UserId,
+                AccountType = "Brukskonto"
+            };
+            var accountController = new AccountController(_context); // Pass the DbContext
+            accountController.AddAccount(Sparekonto);
+            accountController.AddAccount(Brukskonto);
+            await _context.SaveChangesAsync();
             return Ok(true);
         }
         catch (Exception ex)
@@ -58,7 +75,7 @@ public class UserController : ControllerBase
             return Unauthorized(new { message = "Invalid username or password" });
         }
 
-        return Ok(true);
+        return Ok(user.UserId);
     }
 }
 

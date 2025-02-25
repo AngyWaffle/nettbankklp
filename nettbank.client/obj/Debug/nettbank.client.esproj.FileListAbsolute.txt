@@ -1,1 +1,2 @@
-C:\Users\jacob\source\repos\nettbank\nettbank.client\obj\Debug\nettbank.client.esproj.CoreCompileInputs.cache
+C:/Users/jacob/source/repos/nettbank/nettbank.client/obj/Debug/nettbank.client.esproj.CoreCompileInputs.cache
+/home/jacob/Desktop/code/nettbankklp/nettbank.client/obj/Debug/nettbank.client.esproj.CoreCompileInputs.cache
