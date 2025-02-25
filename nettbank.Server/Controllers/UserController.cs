@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Text;
 
 //User API point
-[Route("api/user/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class UserController : ControllerBase
 {

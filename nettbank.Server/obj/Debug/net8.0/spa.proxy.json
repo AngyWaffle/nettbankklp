@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:54363",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "/home/jacob/Desktop/code/nettbankklp/nettbank.Server/../nettbank.client",
+"WorkingDirectory": "C:\\Users\\jacob\\source\\repos\\nettbank\\nettbank.Server\\..\\nettbank.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

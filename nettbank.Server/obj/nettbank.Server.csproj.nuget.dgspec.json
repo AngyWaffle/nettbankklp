@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/home/jacob/Desktop/code/nettbankklp/nettbank.Server/nettbank.Server.csproj": {}
+    "C:\\Users\\jacob\\source\\repos\\nettbank\\nettbank.Server\\nettbank.Server.csproj": {}
   },
   "projects": {
-    "/home/jacob/Desktop/code/nettbankklp/nettbank.Server/nettbank.Server.csproj": {
+    "C:\\Users\\jacob\\source\\repos\\nettbank\\nettbank.Server\\nettbank.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jacob/Desktop/code/nettbankklp/nettbank.Server/nettbank.Server.csproj",
+        "projectUniqueName": "C:\\Users\\jacob\\source\\repos\\nettbank\\nettbank.Server\\nettbank.Server.csproj",
         "projectName": "nettbank.Server",
-        "projectPath": "/home/jacob/Desktop/code/nettbankklp/nettbank.Server/nettbank.Server.csproj",
-        "packagesPath": "/home/jacob/.nuget/packages/",
-        "outputPath": "/home/jacob/Desktop/code/nettbankklp/nettbank.Server/obj/",
+        "projectPath": "C:\\Users\\jacob\\source\\repos\\nettbank\\nettbank.Server\\nettbank.Server.csproj",
+        "packagesPath": "C:\\Users\\jacob\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jacob\\source\\repos\\nettbank\\nettbank.Server\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/jacob/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\jacob\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,12 +39,22 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.AspNetCore.SpaProxy": {
               "target": "Package",
               "version": "[8.*-*, )"
@@ -70,9 +87,13 @@
               "target": "Package",
               "version": "[9.0.2, )"
             },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.6.2, )"
+              "version": "[7.2.0, )"
             },
             "Swashbuckle.AspNetCore.Swagger": {
               "target": "Package",
@@ -98,7 +119,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/8.0.112/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

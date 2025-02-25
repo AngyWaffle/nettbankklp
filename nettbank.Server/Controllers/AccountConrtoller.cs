@@ -1,8 +1,11 @@
-﻿//User API point
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 //Account API point
-[Route("api/account/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class AccountController : ControllerBase
 {
@@ -42,7 +45,7 @@ public class AccountController : ControllerBase
         var accountBalance = new AccountBalance
         {
             AccountNumber = accountDto.AccountNumber,
-            Balance = 0
+            Balance = 1000 //Should be 0, 1000 for testing
         };
 
         // Create the account
@@ -60,40 +63,55 @@ public class AccountController : ControllerBase
     [HttpPost("Transaction")]
     public async Task<IActionResult> Transaction([FromBody] TransactionDto transactionDto)
     {
-        // Map TransactionDto to Transactions
+        // Validate input
+        if (transactionDto.AccountNumber == 0 || transactionDto.AccountNumberReceived == 0 || transactionDto.Amount <= 0)
+        {
+            return BadRequest("Invalid transaction details. Please provide valid account numbers and amount.");
+        }
+
+        // Fetch sender and receiver accounts
+        var senderAccount = await _context.Accounts.FirstOrDefaultAsync(a => a.AccountNumber == transactionDto.AccountNumber);
+        var receiverAccount = await _context.Accounts.FirstOrDefaultAsync(a => a.AccountNumber == transactionDto.AccountNumberReceived);
+
+        if (senderAccount == null || receiverAccount == null)
+        {
+            return BadRequest("One or both accounts do not exist.");
+        }
+
+        // Check sender's balance
+        var senderBalance = await _context.AccountBalance.FirstOrDefaultAsync(ab => ab.AccountNumber == senderAccount.AccountNumber);
+        if (senderBalance == null || senderBalance.Balance < transactionDto.Amount)
+        {
+            return BadRequest("Insufficient funds.");
+        }
+
+        // Update balances
+        senderBalance.Balance -= transactionDto.Amount;
+        var receiverBalance = await _context.AccountBalance.FirstOrDefaultAsync(ab => ab.AccountNumber == receiverAccount.AccountNumber);
+        if (receiverBalance == null)
+        {
+            receiverBalance = new AccountBalance { AccountNumber = receiverAccount.AccountNumber, Balance = transactionDto.Amount };
+            _context.AccountBalance.Add(receiverBalance);
+        }
+        else
+        {
+            receiverBalance.Balance += transactionDto.Amount;
+        }
+
+        // Create transaction record
         var transaction = new Transactions
         {
-            Id = transactionDto.Id,
             AccountNumber = transactionDto.AccountNumber,
             AccountNumberReceived = transactionDto.AccountNumberReceived,
             Amount = transactionDto.Amount,
             Type = transactionDto.Type,
-            Date = transactionDto.Date
+            Date = DateTime.UtcNow
         };
 
-        // Update the account balance
-        var accountBalance = _context.AccountBalance.FirstOrDefault(a => a.AccountNumber == transactionDto.AccountNumberReceived);
-        var accountBalance2 = _context.AccountBalance.FirstOrDefault(a => a.AccountNumber == transactionDto.AccountNumber);
-        if (accountBalance != null&&accountBalance2!=null)
-        {
-            accountBalance.Balance += transactionDto.Amount;
-            accountBalance2.Balance -= transactionDto.Amount;
-        }
-        else
-        {
-            return BadRequest("Account not found");
-        }
+        _context.Transactions.Add(transaction);
+        await _context.SaveChangesAsync();
 
-        // Create the transaction
-        try{
-            _context.Transactions.Add(transaction);
-            await _context.SaveChangesAsync();
-            return Ok(true);
-        }
-        catch(Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        return Ok(new { message = "Transaction successful." });
     }
     // Get all transactions for an account
     [HttpGet("GetTransactions/{accountNumber}")]
@@ -124,6 +142,30 @@ public class AccountController : ControllerBase
         {
             return BadRequest(ex.Message);
         }
+    }
+    [HttpGet("GetAccounts/{userId}")]
+    public async Task<IActionResult> GetAccounts(int userId)
+    {
+        // Fetch accounts linked to the user, including balance
+        var accounts = await _context.Accounts
+            .Where(a => a.UserId == userId)
+            .Select(a => new
+            {
+                a.AccountNumber,
+                a.AccountType,
+                Balance = _context.AccountBalance
+                    .Where(ab => ab.AccountNumber == a.AccountNumber)
+                    .Select(ab => ab.Balance)
+                    .FirstOrDefault()
+            })
+            .ToListAsync();
+
+        if (accounts == null || accounts.Count == 0)
+        {
+            return NotFound(new { message = "No accounts found for this user." });
+        }
+
+        return Ok(accounts);
     }
 }
 

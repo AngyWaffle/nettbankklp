@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "ggS+Q+TCa9Zpz6wxe1wYlr+CFYqOrpqoy/InBDCnNbs=",
+  "Hash": "2GJ8+a60CSa3Szq0fXHeKy0CoqGRm0vExSCVtD7X3A4=",
   "Source": "nettbank.Server",
   "BasePath": "_content/nettbank.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "/home/jacob/Desktop/code/nettbankklp/nettbank.client/nettbank.client.esproj",
+      "Identity": "C:\\Users\\jacob\\source\\repos\\nettbank\\nettbank.client\\nettbank.client.esproj",
       "Version": 2,
       "Source": "nettbank.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
@@ -19,5 +19,6 @@
     }
   ],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }
